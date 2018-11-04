@@ -24,6 +24,8 @@ class TodoApp extends React.Component {
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.totalCount = this.totalCount.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.uncheckedCount = this.uncheckedCount.bind(this);
     }
 
     handleSubmit(value) {
@@ -36,13 +38,27 @@ class TodoApp extends React.Component {
                 }),
                 flag: false
             };
-        },() => {
+        }, () => {
             this.totalCount();
+            this.uncheckedCount();
+
         });
     }
 
     totalCount() {
         itemCountSpan.innerText = this.state.items.length;
+    }
+
+    handleChange(index, event) {
+        let items = this.state.items;
+        items[index].checked = event.target.checked;
+        this.setState({items}, this.uncheckedCount());
+    }
+
+    uncheckedCount() {
+        uncheckedCountSpan.innerText = this.state.items.filter((item) => {
+            return !item.checked
+        }).length;
     }
 
     componentWillReceiveProps(props) {
@@ -55,12 +71,13 @@ class TodoApp extends React.Component {
                     return element(TodoItem, {
                         key: index,
                         text: item,
-                        index: index
-                    })
+                        index: index,
+                        handleChange: this.handleChange
+                    });
                 }
             ),
-            this.state.flag ? element(addToDO, {handleSubmit: this.handleSubmit}) : false
-        )
+            this.state.flag ? element(addToDO, { handleSubmit: this.handleSubmit }) : false
+        );
     }
 }
 
@@ -68,7 +85,11 @@ function TodoItem(props) {
     return (
         element("li", {style: {position: 'relative'}, className: classNames.TODO_ITEM},
             element('span', {className: 'checkbox'},
-                element('input', {type: 'checkbox'}
+                element('input', {
+                        type: 'checkbox', onChange: (event) => {
+                            props.handleChange(props.index, event)
+                        }
+                    }
                 )
             ),
             props.text.item
