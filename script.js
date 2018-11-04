@@ -23,6 +23,7 @@ class TodoApp extends React.Component {
             flag: this.props.flag
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.totalCount = this.totalCount.bind(this);
     }
 
     handleSubmit(value) {
@@ -35,8 +36,13 @@ class TodoApp extends React.Component {
                 }),
                 flag: false
             };
+        },() => {
+            this.totalCount();
         });
+    }
 
+    totalCount() {
+        itemCountSpan.innerText = this.state.items.length;
     }
 
     componentWillReceiveProps(props) {
