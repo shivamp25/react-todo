@@ -56,11 +56,20 @@ ul {
   margin: 10px;
 }
 
-.todo-container {
+.todo-container, .todo-text {
   padding: 20px;
-  border-bottom: 1px solid #333;
+  border: 1px solid #333;
+  width: 50%;
+  border-radius: 15px;
+  margin: 13px auto;
 }
 
 .todo-container:first-of-type {
   border-top: 1px solid #333;
+}
+
+input[type=text] {
+  border: none !important;
+  width: 100% !important;
+  outline: none !important;
 }

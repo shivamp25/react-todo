@@ -83,8 +83,8 @@ class TodoApp extends React.Component {
 
 function TodoItem(props) {
     return (
-        element("li", {style: {position: 'relative'}, className: classNames.TODO_ITEM},
-            element('span', {className: 'checkbox'},
+        element("li", { style: { position: 'relative' }, className: classNames.TODO_ITEM },
+            element('span', { className: 'checkbox' },
                 element('input', {
                         type: 'checkbox', onChange: (event) => {
                             props.handleChange(props.index, event)
@@ -125,5 +125,4 @@ class addToDO extends React.Component {
             )
         )
     }
-
 }
