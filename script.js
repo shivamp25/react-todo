@@ -26,6 +26,7 @@ class TodoApp extends React.Component {
         this.totalCount = this.totalCount.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.uncheckedCount = this.uncheckedCount.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
     }
 
     handleSubmit(value) {
@@ -61,6 +62,16 @@ class TodoApp extends React.Component {
         }).length;
     }
 
+    deleteItem(index) {
+        let updatedToDoList = this.state.items.filter((item) => {
+            return item.id !== this.state.items[index].id;
+        });
+        this.setState({items: updatedToDoList}, () => {
+            this.totalCount();
+            this.uncheckedCount();
+        });
+    }
+
     componentWillReceiveProps(props) {
         this.setState({flag: props.flag});
     }
@@ -72,27 +83,36 @@ class TodoApp extends React.Component {
                         key: index,
                         text: item,
                         index: index,
-                        handleChange: this.handleChange
-                    });
+                        handleChange: this.handleChange,
+                        deleteItem: this.deleteItem,
+                    })
+                        ;
                 }
             ),
-            this.state.flag ? element(addToDO, { handleSubmit: this.handleSubmit }) : false
+            this.state.flag ? element(addToDO, {handleSubmit: this.handleSubmit}) : false
         );
     }
 }
 
 function TodoItem(props) {
     return (
-        element("li", { style: { position: 'relative' }, className: classNames.TODO_ITEM },
-            element('span', { className: 'checkbox' },
+        element("li", {style: {position: 'relative'}, className: classNames.TODO_ITEM},
+            element('label', null,
                 element('input', {
+                        className: 'checkbox',
                         type: 'checkbox', onChange: (event) => {
                             props.handleChange(props.index, event)
                         }
                     }
-                )
+                ),
+                props.text.item,
+                element('button', {
+                    className: classNames.TODO_DELETE,
+                    onClick: (event) => {
+                        props.deleteItem(props.index)
+                    }
+                })
             ),
-            props.text.item
         )
     )
 }

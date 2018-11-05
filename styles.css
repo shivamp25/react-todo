@@ -1,75 +1,109 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html, body {
-  background-color: #eee;
-  margin: 0;
-  padding: 0;
+    background-color: #eee;
+    margin: 0;
+    padding: 0;
 }
 
 ul {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
 }
 
 .center {
-  align-self: center;
+    align-self: center;
 }
 
 .flow-right {
-  display: flex;
-  justify-content: space-around;
+    display: flex;
+    justify-content: space-around;
 }
 
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  height: 100vh;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 100vh;
 }
 
 .title, .controls, .button {
-  flex: none;
-}
-
-.button {
-  padding: 10px 20px;
+    flex: none;
 }
 
 .todo-list {
-  flex: 1 1 0;
-  margin-top: 20px;
-  padding: 20px;
-  overflow-y: auto;
+    flex: 1 1 0;
+    margin-top: 20px;
+    padding: 20px;
+    overflow-y: auto;
 }
 
-.todo-delete {
-  margin: 10px;
+.todo-list li .todo-delete {
+    display: none;
+    border: 0;
+    background: none;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    bottom: 0;
+    margin: auto 0;
+    font-size: 25px;
+    color: #E80C7A;
+    margin-bottom: 2px;
+}
+
+.todo-list li .todo-delete:hover {
+    color: #FF0000;
+}
+
+.todo-list li .todo-delete:after {
+    content: 'x';
+}
+
+.todo-list li:hover .todo-delete {
+    display: block;
 }
 
 .todo-checkbox {
-  margin: 10px;
+    margin: 10px;
 }
 
 .todo-container, .todo-text {
-  padding: 20px;
-  border: 1px solid #333;
-  width: 50%;
-  border-radius: 15px;
-  margin: 13px auto;
+    padding: 20px;
+    border: 1px solid #333;
+    width: 50%;
+    border-radius: 15px;
+    margin: 13px auto;
+}
+
+label {
+    display: block;
+    padding-left: 15px;
+    text-indent: -15px;
+}
+
+label input {
+    width: 18px;
+    height: 18px;
+    margin: 0 15px 0 0;
+    position: relative;
+    vertical-align: bottom;
+    top: 1px;
+    overflow: hidden;
 }
 
 .todo-container:first-of-type {
-  border-top: 1px solid #333;
+    border-top: 1px solid #333;
 }
 
 input[type=text] {
-  border: none !important;
-  width: 100% !important;
-  outline: none !important;
+    border: none !important;
+    width: 100% !important;
+    outline: none !important;
 }
